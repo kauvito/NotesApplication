@@ -20,9 +20,9 @@
         android:src="@drawable/ic_add_note"
         app:fabSize="normal"
         android:importantForAccessibility="no"
-        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

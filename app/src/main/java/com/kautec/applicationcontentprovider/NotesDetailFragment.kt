@@ -20,13 +20,13 @@ class NotesDetailFragment: DialogFragment(), DialogInterface.OnClickListener {
 
     companion object {
         private const val EXTRA_ID = "id"
-        fun newInstance(id: Long): NotesDetailFragment{
+        fun newInstance(id: Long): NotesDetailFragment {
             val bundle = Bundle()
             bundle.putLong(EXTRA_ID, id)
 
-            val notesFragmets = NotesDetailFragment()
-            notesFragmets.arguments = bundle
-            return notesFragmets
+            val notesFragment = NotesDetailFragment()
+            notesFragment.arguments = bundle
+            return notesFragment
         }
     }
 
@@ -37,6 +37,7 @@ class NotesDetailFragment: DialogFragment(), DialogInterface.OnClickListener {
         noteEditDescription = view.findViewById(R.id.note_edt_description) as EditText
 
         var newNote = true
+
         if (arguments != null && arguments?.getLong(EXTRA_ID) != 0L) {
             id = arguments?.getLong(EXTRA_ID) as Long
 
@@ -63,15 +64,15 @@ class NotesDetailFragment: DialogFragment(), DialogInterface.OnClickListener {
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
         val values = ContentValues()
-        values.put(TITLE_NOTES, noteEditTitle.toString())
-        values.put(DESCRIPTION_NOTES, noteEditDescription.toString())
+        values.put(TITLE_NOTES, noteEditTitle.text.toString())
+        values.put(DESCRIPTION_NOTES, noteEditDescription.text.toString())
 
         if (id != 0L) {
             val uri = Uri.withAppendedPath(URI_NOTES, id.toString())
             context?.contentResolver?.update(uri, values, null, null)
         }
         else{
-            context?.contentResolver?.insert(URI_NOTES,values)
+            context?.contentResolver?.insert(URI_NOTES, values)
         }
 
     }
